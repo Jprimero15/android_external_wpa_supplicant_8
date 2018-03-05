@@ -680,7 +680,7 @@ int main(int argc, char *argv[])
 #endif /* CONFIG_DPP */
 
 	for (;;) {
-		c = getopt(argc, argv, "b:Bde:f:hi:KP:sSTtu:vg:G:");
+		c = getopt(argc, argv, "b:Bde:f:hi:KP:sSTtu:vg:G:j:");
 		if (c < 0)
 			break;
 		switch (c) {
@@ -754,6 +754,11 @@ int main(int argc, char *argv[])
 							&if_names_size, optarg))
 				goto out;
 			break;
+#ifdef CONFIG_CTRL_IFACE_HIDL
+		case 'j':
+			interfaces.hidl_service_name = strdup(optarg);
+			break;
+#endif
 		default:
 			usage();
 			break;
